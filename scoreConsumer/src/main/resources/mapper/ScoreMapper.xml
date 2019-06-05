@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.mapper.ScoreMapper">
+    <resultMap id="BaseResultMap" type="ScoreModel">
+        <result column="id" property="id"/>
+        <result column="order_no" property="orderNo"/>
+        <result column="score" property="score"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, order_no, score
+  </sql>
+    <insert id="insert" parameterType="ScoreModel" useGeneratedKeys="true" keyProperty="id">
+    insert into t_score ( order_no, score)
+    values ( #{orderNo}, #{score})
+  </insert>
+
+
+    <select id="getByOrderNo" parameterType="String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_score
+        where order_no = #{orderNo}
+        limit 1
+    </select>
+</mapper>
